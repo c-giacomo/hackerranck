@@ -1,18 +1,19 @@
-package it.permutation.chatgtp.soluton;
+package it.permutation.core;
 
 import java.util.Arrays;
 
-public class ChatGtp {
-	
-	public static void main(String[] args) {
-		int[] arr = {1, 2, 3, 4, 5};
-		printPermutations(arr, 0);
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class ChatGtpSolution {
+
+	private ChatGtpSolution() {
+		throw new IllegalStateException("Utility class");
 	}
-	
-	
+
 	static void printPermutations(int[] arr, int index) {
 		if (index == arr.length) {
-			System.out.println(Arrays.toString(arr));
+			log.info(Arrays.toString(arr));
 			return;
 		}
 
@@ -20,6 +21,7 @@ public class ChatGtp {
 			swap(arr, index, i);
 			printPermutations(arr, index + 1);
 			swap(arr, index, i);
+
 		}
 	}
 
