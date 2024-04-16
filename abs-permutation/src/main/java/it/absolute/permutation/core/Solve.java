@@ -1,39 +1,44 @@
 package it.absolute.permutation.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Solve {
-	
+
 	public List<Integer> solve(int n, int k) {
-		int[] arr = new int[n];
-		for (int i=0; i < n; i++) arr[i] = i+1;
-		
-		
-		List<List<Integer>> perm = new ArrayList<>(); // TODO method that generate n! simple permutation
-		
-		List<Integer> result = Arrays.asList(-1);
-		
-		boolean equals = false;
-		for (int i=0; i < perm.size(); i++) {
-			List<Integer> lista = perm.get(i);
-			for (int j=0; j < lista.size(); j++) {
-				if ((Math.abs(lista.get(j) - arr[j])) == k) {
-					equals = true;
+		List<Integer> permutation = new ArrayList<>();
+
+		if (k == 0) {
+			for (int i = 1; i <= n; i++) {
+				permutation.add(i);
+			}
+		} else if (n % (2 * k) == 0) {
+			boolean[] position = new boolean[n + 1];
+			for (int i = 1; i <= n; i++) {
+				int pos1 = i - k;
+				int pos2 = i + k;
+
+				if (pos1 > 0 && !position[pos1]) {
+					permutation.add(pos1);
+					position[pos1] = true;
+				} else if (pos2 <= n && !position[pos2]) {
+					permutation.add(pos2);
+					position[pos2] = true;
 				} else {
-					equals = false;
+					permutation.clear();
+					for (int j = 1; j <= n; j++) {
+						permutation.add(j);
+					}
 					break;
 				}
+
 			}
-			if (equals) {
-				result = lista;
-				System.out.println(result);
-			}
+		} else {
+			permutation.add(-1);
 		}
-		
-		return result;
-		
+
+		return permutation;
+
 	}
 
 }
